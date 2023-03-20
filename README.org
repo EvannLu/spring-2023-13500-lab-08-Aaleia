@@ -1,11 +1,8 @@
 * Spring 2023 - Lab 08
 
-* Last name:
-
-* First name:
-
-* GitHub username:
-
+* Last name: Fernando
+* First name: Aaleia
+* GitHub username: Aaleia
 * Notes:
 
 
