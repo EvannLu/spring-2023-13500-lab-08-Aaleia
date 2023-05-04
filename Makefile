@@ -13,4 +13,4 @@ main.o: main.cpp imageio.h funcs.h
 funcs.o: imageio.h funcs.cpp funcs.h
 
 clean:
-	rm -f sample.o imageio.o main.o funcs.o
+	rm -f *.o main sample outImage.pgm taskA.pgm taskB.pgm taskC.pgm taskD.pgm taskE.pgm taskF.pgm taskG.pgm

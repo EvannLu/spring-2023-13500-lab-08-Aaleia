@@ -16,6 +16,7 @@ void invert(std::string input) {
       inverted[row][col] = abs(255 - image[row][col]);
     }
   }
+
   writeImage("taskA.pgm", inverted, height, width);
 }
 
@@ -27,6 +28,7 @@ void invert_half(std::string input) {
   int h, w;
   readImage(input, image, h, w); 
   int inverted2[MAX_H][MAX_W];
+
   for (int row = 0; row < h; row++) {
     for (int col = 0; col < w; col++) {
       if (col >= w/2){
@@ -36,6 +38,7 @@ void invert_half(std::string input) {
       }
     }
   }
+
   writeImage("taskB.pgm", inverted2, h, w);
 }
 
@@ -57,6 +60,7 @@ void box(std::string input) {
       }
     }
   }
+
   writeImage("taskC.pgm", box, h, w);
 }
 
@@ -92,6 +96,7 @@ void scale(std::string input) {
   int scaled[MAX_H][MAX_W];
   int height, width;
   readImage(input, img, height, width);
+
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
       scaled[i*2][j*2] = img[i][j];
@@ -100,8 +105,10 @@ void scale(std::string input) {
       scaled[i*2 + 1][j*2 + 1] = img[i][j];
     }
   }
+
   height *= 2;
   width *= 2;
+
   writeImage("taskE.pgm", scaled, height, width);
 }
 
@@ -113,6 +120,7 @@ void pixelate(std::string input) {
   int h, w;
   readImage(input, img, h, w);
   int pixelated[MAX_H][MAX_W];
+
   for (int row = 0; row < h; row += 2) {
     for (int col = 0; col < w; col += 2) {
       int avg = round((img[row][col] + img[row + 1][col] + img[row][col + 1] + img[row + 1][col + 1]) / 4);
@@ -122,6 +130,7 @@ void pixelate(std::string input) {
       pixelated[row+1][col+1] = avg;
     }
   }
+
   writeImage("taskF.pgm", pixelated, h, w);
 }
 
@@ -164,13 +173,22 @@ void kernel(std::string input) {
   int h, w;
   readImage(input, img, h, w);
   int kerneled[MAX_H][MAX_W];
+
   for (int row = 0; row < h; row++) {
     for (int col = 0; col < w; col++) {
-      int value = sobel(img[row-1][col-1], img[row-1][col], img[row-1][col+1], img[row][col-1], img[row][col], img[row][col+1], img[row+1][col-1], img[row+1][col], img[row+1][col+1]);
+      int value = sobel(img[row-1][col-1], 
+                        img[row-1][col], 
+                        img[row-1][col+1], 
+                        img[row][col-1], 
+                        img[row][col], 
+                        img[row][col+1], 
+                        img[row+1][col-1], 
+                        img[row+1][col], 
+                        img[row+1][col+1]);
       if (value < 0){
-	value = 0;
+        value = 0;
       } else if (value > 255) {
-	value = 255;
+        value = 255;
       }
       if (row == 0 || row == h - 1 || col == 0 || col == w - 1) {
         value = 0;
@@ -178,5 +196,6 @@ void kernel(std::string input) {
       kerneled[row][col] = value;
     }
   }
+
   writeImage("taskG.pgm", kerneled, h, w);
 }
